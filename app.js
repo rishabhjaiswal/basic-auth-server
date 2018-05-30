@@ -8,6 +8,21 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var secrets = require('./secrets');
 
+const mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
+
+const Users = require('./models/users');
+
+const url = 'mongodb://localhost:27017/confusion';
+
+const connect = mongoose.connect(url);
+
+connect.then((db) => {
+  console.log("Connected properly to server ");
+}, (err) => {
+  console.log("err ", err);
+});
+
 var app = express();
 
 // view engine setup
